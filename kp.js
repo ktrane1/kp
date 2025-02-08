@@ -67,7 +67,9 @@ const colors = [
 
 function renderMatrix(ctx, canvas, m) {
 
-  const cellHeight = canvas.height / m.length;   // Divide height by number of rows
+  let height = canvas.height < canvas.width ? canvas.height / m.length : canvas.width / m.length
+
+  const cellHeight = height  // Divide height by number of rows
   // const cellWidth = canvas.width / m[0].length;  // Divide width by number of columns
   const cellWidth = cellHeight
 
@@ -77,6 +79,7 @@ function renderMatrix(ctx, canvas, m) {
   const cols = m[0].length;
 
   const offsetX = (canvas.width / 2) - (cellWidth * cols / 2)
+  const offsetY = (canvas.height / 2) - (cellWidth * rows / 2)
 
   let max = 0
   // Loop through each row and column of the matrix
@@ -90,7 +93,7 @@ function renderMatrix(ctx, canvas, m) {
 
       // Draw a rectangle for each matrix value
       ctx.fillStyle = color;
-      ctx.fillRect(col * cellWidth + offsetX, row * cellHeight, cellWidth, cellHeight);
+      ctx.fillRect(col * cellWidth + offsetX, row * cellHeight + offsetY, cellWidth, cellHeight);
 
     }
   }
